@@ -21,10 +21,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          // ActivitiesWidget(),
-          SleepWidget()
-        ],
+        children: [ActivitiesWidget(), SleepWidget()],
       ),
     );
   }

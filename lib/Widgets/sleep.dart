@@ -116,6 +116,15 @@ class _SleepWidgetState extends State<SleepWidget> {
                     child: Center(
                       child: Text("You have Slept for $ab"),
                     ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text("Submit"),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.blue),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white)),
                   )
                 ],
               )),
