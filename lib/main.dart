@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nit_app_ui/Screens/login.dart';
+import 'package:nit_app_ui/Screens/signup.dart';
+import 'package:nit_app_ui/Screens/survey.dart';
 import 'package:nit_app_ui/Widgets/activities.dart';
 
 import 'Screens/home.dart';
@@ -14,12 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
-      // home: ActivitiesWidget(),
+      // home: HomePage(),
+      // home: SignupPage(),
+      home: LoginPage(),
     );
   }
 }

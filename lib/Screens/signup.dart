@@ -20,9 +20,7 @@ class _SignupPageState extends State<SignupPage> {
             child: FutureBuilder<Task>(
               future: getSampleTask(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData &&
-                    snapshot.data != null) {
+                if (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data != null) {
                   final task = snapshot.data!;
                   return SurveyKit(
                     onResult: (SurveyResult result) {
@@ -59,11 +57,11 @@ class _SignupPageState extends State<SignupPage> {
                           side: MaterialStateProperty.resolveWith(
                             (Set<MaterialState> state) {
                               if (state.contains(MaterialState.disabled)) {
-                                return BorderSide(
+                                return const BorderSide(
                                   color: Colors.grey,
                                 );
                               }
-                              return BorderSide(
+                              return const BorderSide(
                                 color: Colors.cyan,
                               );
                             },
@@ -76,17 +74,11 @@ class _SignupPageState extends State<SignupPage> {
                           textStyle: MaterialStateProperty.resolveWith(
                             (Set<MaterialState> state) {
                               if (state.contains(MaterialState.disabled)) {
-                                return Theme.of(context)
-                                    .textTheme
-                                    .button
-                                    ?.copyWith(
+                                return Theme.of(context).textTheme.button?.copyWith(
                                       color: Colors.grey,
                                     );
                               }
-                              return Theme.of(context)
-                                  .textTheme
-                                  .button
-                                  ?.copyWith(
+                              return Theme.of(context).textTheme.button?.copyWith(
                                     color: Colors.cyan,
                                   );
                             },
@@ -120,21 +112,20 @@ class _SignupPageState extends State<SignupPage> {
       steps: [
         InstructionStep(
           title: 'Welcome to the \n Survey App',
-          text:
-              'Thank you for heelping me with the survey.\n I would ned a little more info about yourself',
+          text: 'Thank you for heelping me with the survey.\n I would ned a little more info about yourself',
           buttonText: 'Let\'s go!',
         ),
         QuestionStep(
           title: 'Whats your name?',
-          answerFormat: TextAnswerFormat(
+          answerFormat: const TextAnswerFormat(
             maxLines: 1,
-            hint: 'Please enter your Name (Optional)',
+            hint: 'Please enter your Name',
           ),
           isOptional: true,
         ),
         QuestionStep(
           title: 'How old are you?',
-          answerFormat: IntegerAnswerFormat(
+          answerFormat: const IntegerAnswerFormat(
             defaultValue: 25,
             hint: 'Please enter your age (Optional)',
           ),
@@ -143,27 +134,110 @@ class _SignupPageState extends State<SignupPage> {
         QuestionStep(
           title: 'Student?',
           text: 'Are you a student?',
-          answerFormat: BooleanAnswerFormat(
+          answerFormat: const BooleanAnswerFormat(
             positiveAnswer: 'Yes',
             negativeAnswer: 'No',
             result: BooleanResult.POSITIVE,
           ),
         ),
         QuestionStep(
-          title: 'When did you wake up?',
-          answerFormat: TimeAnswerFormat(
+          title: 'Choose your emotion',
+          answerFormat: const SingleChoiceAnswerFormat(textChoices: [
+            TextChoice(text: 'Happy', value: 'Happy'),
+            TextChoice(text: 'Stressed', value: 'Stressed'),
+            TextChoice(text: 'Sad', value: 'Sad'),
+            TextChoice(text: 'Relaxed', value: 'Relaxed'),
+          ]),
+        ),
+        QuestionStep(
+          title: 'How are you feeling today?',
+          answerFormat: const SingleChoiceAnswerFormat(textChoices: [
+            TextChoice(text: 'Happy', value: 'Happy'),
+            TextChoice(text: 'Stressed', value: 'Stressed'),
+            TextChoice(text: 'Sad', value: 'Sad'),
+            TextChoice(text: 'Relaxed', value: 'Relaxed'),
+          ]),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'Happy'),
+          title: 'Happy?',
+          answerFormat: const SingleChoiceAnswerFormat(textChoices: [
+            TextChoice(text: 'Happy', value: 'Happy'),
+            TextChoice(text: 'Excited', value: 'Excited'),
+            TextChoice(text: 'Energetic', value: 'Energetic'),
+          ]),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'Sad'),
+          title: 'Sad?',
+          answerFormat: const SingleChoiceAnswerFormat(textChoices: [
+            TextChoice(text: 'Sad', value: 'Sad'),
+            TextChoice(text: 'Calm', value: 'Calm'),
+            TextChoice(text: 'Depressed', value: 'Depressed'),
+            TextChoice(text: 'Bored', value: 'Bored'),
+            TextChoice(text: 'Gloomy', value: 'Gloomy'),
+            TextChoice(text: 'Miserable', value: 'Miserable'),
+          ]),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'Stressed'),
+          title: 'Stressed?',
+          answerFormat: const SingleChoiceAnswerFormat(textChoices: [
+            TextChoice(text: 'Stress', value: 'Stress'),
+            TextChoice(text: 'Frustrated', value: 'Frustrated'),
+            TextChoice(text: 'Anger', value: 'Anger'),
+            TextChoice(text: 'Afraid', value: 'Afraid'),
+          ]),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'Relaxed'),
+          title: 'Relaxed?',
+          answerFormat: const SingleChoiceAnswerFormat(textChoices: [
+            TextChoice(text: 'Calm', value: 'Calm'),
+            TextChoice(text: 'Relaxed', value: 'Relaxed'),
+            TextChoice(text: 'Satisfied', value: 'Satisfied'),
+            TextChoice(text: 'Tired', value: 'Tired'),
+            TextChoice(text: 'Sleepy', value: 'Sleepy'),
+          ]),
+        ),
+        QuestionStep(
+          title: 'When did you go to sleep?',
+          answerFormat: const TimeAnswerFormat(
             defaultValue: TimeOfDay(
-              hour: 12,
+              hour: 22,
               minute: 0,
             ),
           ),
         ),
         QuestionStep(
-          title: 'When is your birthday?',
-          answerFormat: DateAnswerFormat(
-            minDate: DateTime.utc(1970),
-            defaultDate: DateTime.now(),
-            maxDate: DateTime.now(),
+          title: 'When did you wake up?',
+          answerFormat: const TimeAnswerFormat(
+            defaultValue: TimeOfDay(
+              hour: 6,
+              minute: 0,
+            ),
+          ),
+        ),
+        QuestionStep(
+          title: 'How active were you today?',
+          answerFormat: const ScaleAnswerFormat(
+            step: 1,
+            minimumValue: -2,
+            maximumValue: 2,
+            defaultValue: 0,
+            minimumValueDescription: '-2',
+            maximumValueDescription: '2',
+          ),
+        ),
+        QuestionStep(
+          title: 'How will you rate your happiness?',
+          answerFormat: const ScaleAnswerFormat(
+            step: 1,
+            minimumValue: -2,
+            maximumValue: 2,
+            defaultValue: 0,
+            minimumValueDescription: '-2',
+            maximumValueDescription: '2',
           ),
         ),
         CompletionStep(
@@ -174,20 +248,42 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ],
     );
+
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[2].stepIdentifier,
+      forTriggerStepIdentifier: task.steps[5].stepIdentifier,
       navigationRule: ConditionalNavigationRule(
         resultToStepIdentifierMapper: (input) {
           switch (input) {
-            case "Yes":
-              return task.steps[0].stepIdentifier;
-            case "No":
+            case "Happy":
+              return task.steps[6].stepIdentifier;
+            case "Stressed":
+              return task.steps[8].stepIdentifier;
+            case "Sad":
               return task.steps[7].stepIdentifier;
+            case "Relaxed":
+              return task.steps[9].stepIdentifier;
             default:
               return null;
           }
         },
       ),
+    );
+
+    task.addNavigationRule(
+      forTriggerStepIdentifier: task.steps[6].stepIdentifier,
+      navigationRule: DirectNavigationRule(task.steps[10].stepIdentifier),
+    );
+    task.addNavigationRule(
+      forTriggerStepIdentifier: task.steps[7].stepIdentifier,
+      navigationRule: DirectNavigationRule(task.steps[10].stepIdentifier),
+    );
+    task.addNavigationRule(
+      forTriggerStepIdentifier: task.steps[8].stepIdentifier,
+      navigationRule: DirectNavigationRule(task.steps[10].stepIdentifier),
+    );
+    task.addNavigationRule(
+      forTriggerStepIdentifier: task.steps[9].stepIdentifier,
+      navigationRule: DirectNavigationRule(task.steps[10].stepIdentifier),
     );
     return Future.value(task);
   }

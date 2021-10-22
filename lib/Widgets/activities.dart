@@ -13,10 +13,14 @@ class _ActivitiesWidgetState extends State<ActivitiesWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Expanded(
+      // height: MediaQuery.of(context).size.height / 2,
+      constraints:
+          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.55),
+      child: Flexible(
         child: GridView.count(
+          physics: NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
-          childAspectRatio: (1 / 0.5),
+          childAspectRatio: (1 / 0.6),
           children: [
             Item(url: "sitting.png", activity: "Sitting"),
             Item(url: "standing.png", activity: "Standing"),
